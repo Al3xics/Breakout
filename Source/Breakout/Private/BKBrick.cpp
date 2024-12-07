@@ -11,16 +11,16 @@ ABKBrick::ABKBrick()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+// Called every frame
+void ABKBrick::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+}
+
 // Called when the game starts or when spawned
 void ABKBrick::BeginPlay()
 {
 	Super::BeginPlay();
 	
-}
-
-// Called every frame
-void ABKBrick::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
