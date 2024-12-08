@@ -14,17 +14,10 @@
   <component name="ChangeListManager">
     <list default="true" id="eaa7c403-f88b-496b-8056-6114d46b25e1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Breakout/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Breakout/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Breakout/Blueprint/BP_BKGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Breakout/Blueprint/BP_BKGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Breakout/Blueprint/BP_Paddle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Breakout/Blueprint/BP_Paddle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Private/BKBoundaryWallComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKBoundaryWallComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Breakout/Private/BKGameBall.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKGameBall.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Breakout/Private/BKGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Private/BKPaddle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKPaddle.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Public/BKBoundaryWallComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKBoundaryWallComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Breakout/Public/BKGameBall.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKGameBall.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Breakout/Public/BKGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKGameMode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Public/BKPaddle.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKPaddle.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -316,11 +309,45 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://68" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://78" root0="FORCE_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://79" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Developer/AITestSuite/Public/AITestsCommon.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Developer/LogVisualizer/Private/LogVisualizer.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Editor/MovieSceneTools/Private/EditModes/SkeletalAnimationTrackEditMode.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Editor/Persona/Private/AnimationEditorViewportClient.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Math/UnrealMathSSE.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/CoreUObject/Public/UObject/Object.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectHandle.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectPtr.h" root0="FORCE_HIGHLIGHTING" />
@@ -464,7 +491,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1733653407865</updated>
-      <workItem from="1733653409052" duration="20639000" />
+      <workItem from="1733653409052" duration="29963000" />
     </task>
     <servers />
   </component>
@@ -479,6 +506,7 @@
     <watches-manager>
       <configuration name="CppProject">
         <watch expression="WallBox" />
+        <watch expression="BkGameMode" />
       </configuration>
     </watches-manager>
   </component>

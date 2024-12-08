@@ -3,9 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "BKGameBall.generated.h"
 
+class ABKPaddle;
 class ABKGameMode;
 class UBKBoundaryWallComponent;
 
@@ -41,20 +43,32 @@ public:
 
 	UFUNCTION(Blueprintable)
 	void InitializeGameBall(const FVector& PaddleLocation, const FVector& GameBoxCenter, const FVector& GameBoxExtent);
+
+	UFUNCTION(Blueprintable)
+	bool CheckCollisionWithPaddle(const UBoxComponent* PaddleBox);
+
+	UFUNCTION(Blueprintable)
+	bool CheckCollisionWithGameBox();
+
+	UFUNCTION(BlueprintCallable)
+	void ReflectBall(const UBoxComponent* Box);
 	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-private:	
-	UPROPERTY()
-	FVector CurrentLocation;
-	
+private:
 	UPROPERTY()
 	FVector CurrentDirection;
 
 	UPROPERTY()
 	ABKGameMode* BkGameMode;
+
+	UPROPERTY()
+	ABKPaddle* BkPaddle;
+
+	UPROPERTY()
+	UBoxComponent* BkPaddleBox;
 
 	UFUNCTION()
 	void MoveBall(float DeltaTime);

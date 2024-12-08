@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "BKGameMode.generated.h"
 
+class UBKBoundaryWallComponent;
 class ABKGameBall;
 class ABKPaddle;
 /**
@@ -37,7 +38,7 @@ public:
 	FVector GameBoxCenter = FVector(700.0f, 0.0f, 0.0f);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Game Mode")
-	FVector GameBoxExtent = FVector(800.0f, 600.0f, 0.0f);
+	FVector GameBoxExtent = FVector(800.0f, 600.0f, 300.0f);
 
 	UPROPERTY(EditAnywhere, Category="BK Game Mode")
 	bool bShowBox = true;
@@ -46,7 +47,13 @@ public:
 	AActor* WallActor;
 
 	UPROPERTY()
+	UBKBoundaryWallComponent* WallComponent;
+
+	UPROPERTY()
 	ABKGameBall* GameBall;
+
+	UPROPERTY()
+	ABKPaddle* BkPaddle;
 
 protected:
 	// Called when the game starts or when spawned

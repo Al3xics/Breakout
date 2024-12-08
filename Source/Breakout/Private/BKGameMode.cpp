@@ -6,6 +6,7 @@
 #include "BKBoundaryWallComponent.h"
 #include "BKGameBall.h"
 #include "BKPaddle.h"
+#include "EngineUtils.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 void ABKGameMode::Tick(float DeltaTime)
@@ -85,7 +86,7 @@ void ABKGameMode::SnapToGround(AActor* Actor) const
 		}
 		else if (ABKGameBall* Ball = Cast<ABKGameBall>(Actor))
 		{
-			Ball->SetActorLocation(FVector(StartLocation.X, StartLocation.Y, Ball->SphereRadius + GroundLocation.Z));
+			Ball->SetActorLocation(FVector(StartLocation.X, StartLocation.Y, Ball->SphereRadius/2 + GroundLocation.Z));
 		}
 
 		
@@ -96,17 +97,21 @@ void ABKGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	for (TActorIterator<ABKPaddle> It(GetWorld()); It; ++It)
+	{
+		BkPaddle = *It;
+	}
+
 	FActorSpawnParameters SpawnsParams;
 	SpawnsParams.Owner = this;
 	
 	WallActor = GetWorld()->SpawnActor<AActor>(AActor::StaticClass(), GameBoxCenter, FRotator::ZeroRotator, SpawnsParams);
 	if (WallActor)
 	{
-		if (UBKBoundaryWallComponent* WallComponent = NewObject<UBKBoundaryWallComponent>(WallActor))
+		WallComponent = NewObject<UBKBoundaryWallComponent>(WallActor);
+		if (WallComponent)
 		{
 			if (!WallComponent->IsRegistered()) WallComponent->RegisterComponent();
-
-			// Je ne comprend pas pourquoi ma box de collisions n'est plus visible (cétait le cas avant....)
 			
 			// GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Yellow, FString::Printf(TEXT("Wall Actor Owner : %s"), *WallActor->GetOwner()->GetName()));
 			// GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Yellow, FString::Printf(TEXT("Wall Component Owner : %s"), *WallComponent->GetOwner()->GetName()));

@@ -5,6 +5,7 @@
 
 #include "BKBoundaryWallComponent.h"
 #include "BKGameMode.h"
+#include "BKPaddle.h"
 
 // Sets default values
 ABKGameBall::ABKGameBall()
@@ -26,6 +27,18 @@ void ABKGameBall::Tick(float DeltaTime)
 
 	MoveBall(DeltaTime);
 
+	if (BkGameMode && BkGameMode->GameBall && BkGameMode->GameBall->BoundaryWall)
+	{
+		if (CheckCollisionWithPaddle(BkPaddleBox))
+		{
+			ReflectBall(BkPaddleBox);
+		}
+		else if (CheckCollisionWithGameBox())
+		{
+			ReflectBall(BkGameMode->WallComponent->WallBox);
+		}
+	}
+
 }
 
 // Called when the game starts or when spawned
@@ -35,6 +48,10 @@ void ABKGameBall::BeginPlay()
 
 	// Get a ref to BKGameMode
 	BkGameMode = Cast<ABKGameMode>(GetWorld()->GetAuthGameMode());
+
+	// Get a ref to BKPaddle and its WallBox
+	BkPaddle = BkGameMode->BkPaddle;
+	BkPaddleBox = BkGameMode->BkPaddle->BoundaryWall->WallBox;
 
 	// Initialize the component to have the same size as static mesh (used to check collision)
 	SphereCenter = StaticMeshComponent->GetComponentLocation();
@@ -47,20 +64,148 @@ void ABKGameBall::BeginPlay()
 
 void ABKGameBall::InitializeGameBall(const FVector& PaddleLocation, const FVector& GameBoxCenter, const FVector& GameBoxExtent)
 {
-	CurrentLocation = GetActorLocation();
-
 	// Compute initial direction : from the ball's current position to the paddle's position
-	CurrentDirection = (PaddleLocation - CurrentLocation).GetSafeNormal();
+	CurrentDirection = PaddleLocation - GetActorLocation();
+	CurrentDirection.Z = 0.0f;
+	CurrentDirection = CurrentDirection.GetSafeNormal();
 
 	// Add a small random offset to the direction to avoid a perfect perpendicular trajectory
 	const FVector RandomOffset = FVector(FMath::RandRange(-0.2f, 0.2f), FMath::RandRange(-0.2f, 0.2f), 0.0f);
 	CurrentDirection += RandomOffset;
+	CurrentDirection.Z = 0.0f;
 	CurrentDirection = CurrentDirection.GetSafeNormal();
+}
+
+bool ABKGameBall::CheckCollisionWithPaddle(const UBoxComponent* PaddleBox)
+{
+	if (!BoundaryWall || !StaticMeshComponent)
+	{
+		return false;
+	}
+	
+	const FVector BallPosition = GetActorLocation();
+	const FVector PaddleLocation = PaddleBox->GetComponentLocation();
+	const FVector PaddleExtent = PaddleBox->GetUnscaledBoxExtent();
+	
+	// Verify if ball location is in paddle box
+	if (FVector::Dist(BallPosition, PaddleLocation) < PaddleExtent.Size())
+	{
+		// GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, TEXT("Collision Detected"));
+		return true;
+	}
+	
+	return false;
+}
+
+bool ABKGameBall::CheckCollisionWithGameBox()
+{
+	if (!BoundaryWall || !StaticMeshComponent)
+	{
+		return false;
+	}
+	
+	const FVector BallPosition = GetActorLocation();
+    
+	// Determine the limits of the GameBox
+	const FVector GameBoxMin = BkGameMode->GameBoxCenter - BkGameMode->GameBoxExtent;
+	const FVector GameBoxMax = BkGameMode->GameBoxCenter + BkGameMode->GameBoxExtent;
+
+	// Check if the ball is outside the GameBox boundaries
+	if (BallPosition.X - SphereRadius < GameBoxMin.X || BallPosition.X + SphereRadius > GameBoxMax.X ||
+		BallPosition.Y - SphereRadius < GameBoxMin.Y || BallPosition.Y + SphereRadius > GameBoxMax.Y ||
+		BallPosition.Z - SphereRadius < GameBoxMin.Z || BallPosition.Z + SphereRadius > GameBoxMax.Z)
+	{
+		DrawDebugBox(
+			GetWorld(),
+			BkGameMode->GameBoxCenter,
+			BkGameMode->GameBoxExtent,
+			FColor::Blue,
+			false,
+			1.0f
+		);
+
+		// GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Blue, TEXT("Balle hors de la GameBox"));
+		return true;
+	}
+
+	return false;
+}
+
+void ABKGameBall::ReflectBall(const UBoxComponent* Box)
+{
+	if (!Box)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("No Box Found"));
+		return;
+	}
+
+	// Récupérer la position de la balle et du centre de la box
+	const FVector BallPosition = GetActorLocation();
+	const FVector BoxCenter = Box->GetComponentLocation();
+	const FVector BoxExtent = Box->GetUnscaledBoxExtent();
+
+	// Vérifier si la collision est avec un mur latéral ou supérieur/inférieur
+	bool bIsWallCollision = FMath::Abs(BallPosition.X - BoxCenter.X) > BoxExtent.X - SphereRadius ||
+							FMath::Abs(BallPosition.Y - BoxCenter.Y) > BoxExtent.Y - SphereRadius;
+
+	FVector ReflectedVelocity = CurrentDirection * Velocity;
+
+	if (bIsWallCollision)
+	{
+		// Collision avec un mur : Inverser l'axe Y ou X
+		if (FMath::Abs(BallPosition.X - BoxCenter.X) > BoxExtent.X - SphereRadius)
+		{
+			ReflectedVelocity.X *= -1; // Rebond sur un mur supérieur/inférieur
+		}
+		if (FMath::Abs(BallPosition.Y - BoxCenter.Y) > BoxExtent.Y - SphereRadius)
+		{
+			ReflectedVelocity.Y *= -1; // Rebond sur un mur latéral
+		}
+	}
+	else
+	{
+		// Collision avec le paddle : Modifier l'angle en fonction de la position sur le paddle
+		FVector PaddleNormal = (BallPosition - BoxCenter);
+		PaddleNormal.Z = 0.0f; // Ignorer Z
+		PaddleNormal = PaddleNormal.GetSafeNormal();
+
+		// Appliquer la réflexion normale
+		ReflectedVelocity = ReflectedVelocity - 2 * FVector::DotProduct(ReflectedVelocity, PaddleNormal) * PaddleNormal;
+
+		// Toujours orienter la balle vers le haut en X
+		ReflectedVelocity.X = FMath::Abs(ReflectedVelocity.X);
+	}
+
+	// Forcer Z à 0 (pas de mouvement vertical)
+	ReflectedVelocity.Z = 0.0f;
+
+	// Mettre à jour la direction de la balle
+	CurrentDirection = ReflectedVelocity.GetSafeNormal();
+
+	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, TEXT("Ball Reflected"));
+
+	// // Calculate the bounce normal (normal based on the collision surface)
+	// FVector PaddleNormal = (GetActorLocation() - Box->GetComponentLocation());
+	// PaddleNormal.Z = 0.0f;
+	// PaddleNormal = PaddleNormal.GetSafeNormal();
+	//
+	// // Apply the reflection formula
+	// const FVector IncomingVelocity = CurrentDirection * Velocity;
+	// FVector ReflectedVelocity = IncomingVelocity - 2 * FVector::DotProduct(IncomingVelocity, PaddleNormal) * PaddleNormal;
+	//
+	// // To always make the ball go up (if hit)
+	// ReflectedVelocity.X = FMath::Abs(ReflectedVelocity.X);
+	// ReflectedVelocity.Y = FMath::Abs(ReflectedVelocity.Y);
+	// ReflectedVelocity.Z = 0.0f;
+	//
+	// // Update the ball direction with the new calculated direction
+	// CurrentDirection = ReflectedVelocity.GetSafeNormal();
+	//
+	// // GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, TEXT("Ball Reflected"));
 }
 
 void ABKGameBall::MoveBall(float DeltaTime)
 {
-	CurrentLocation = GetActorLocation();
-	SetActorLocation(CurrentLocation + CurrentDirection * Velocity * DeltaTime);
+	SetActorLocation(GetActorLocation() + CurrentDirection * Velocity * DeltaTime);
 }
 
