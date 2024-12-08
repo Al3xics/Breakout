@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "BKBrick.generated.h"
 
+class USphereComponent;
+class ABKGameMode;
 class UBKBoundaryWallComponent;
 
 UCLASS()
@@ -23,13 +25,29 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Brick")
 	UBKBoundaryWallComponent* BoundaryWall;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Brick")
+	FVector BoxCenter = FVector(0.0f, 0.0f, 0.0f);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Brick")
+	FVector BoxExtent = FVector(50.0f, 50.0f, 10.0f);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Brick")
+	bool bShowBox = true;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION(Blueprintable)
+	bool CheckCollisionWithGameBall(const USphereComponent* GameBallBox);
 	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
-	
+	UPROPERTY()
+	FVector CurrentLocation;
+
+	UPROPERTY()
+	ABKGameMode* BkGameMode;
 };

@@ -182,7 +182,7 @@ void ABKGameBall::ReflectBall(const UBoxComponent* Box)
 	// Update ball direction
 	CurrentDirection = ReflectedVelocity.GetSafeNormal();
 
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, TEXT("Ball Reflected"));
+	// GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, TEXT("Ball Reflected"));
 }
 
 void ABKGameBall::MoveBall(float DeltaTime)
