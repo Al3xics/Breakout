@@ -139,12 +139,12 @@ void ABKGameBall::ReflectBall(const UBoxComponent* Box)
 		return;
 	}
 
-	// Récupérer la position de la balle et du centre de la box
+	// Retrieve the position of the ball and the center of the box
 	const FVector BallPosition = GetActorLocation();
 	const FVector BoxCenter = Box->GetComponentLocation();
 	const FVector BoxExtent = Box->GetUnscaledBoxExtent();
 
-	// Vérifier si la collision est avec un mur latéral ou supérieur/inférieur
+	// Check if the collision is with a side or upper/lower wall
 	bool bIsWallCollision = FMath::Abs(BallPosition.X - BoxCenter.X) > BoxExtent.X - SphereRadius ||
 							FMath::Abs(BallPosition.Y - BoxCenter.Y) > BoxExtent.Y - SphereRadius;
 
@@ -152,56 +152,37 @@ void ABKGameBall::ReflectBall(const UBoxComponent* Box)
 
 	if (bIsWallCollision)
 	{
-		// Collision avec un mur : Inverser l'axe Y ou X
+		// Collision with a wall: Invert Y or X axis
 		if (FMath::Abs(BallPosition.X - BoxCenter.X) > BoxExtent.X - SphereRadius)
 		{
-			ReflectedVelocity.X *= -1; // Rebond sur un mur supérieur/inférieur
+			ReflectedVelocity.X *= -1; // Bounce on an upper/lower wall
 		}
 		if (FMath::Abs(BallPosition.Y - BoxCenter.Y) > BoxExtent.Y - SphereRadius)
 		{
-			ReflectedVelocity.Y *= -1; // Rebond sur un mur latéral
+			ReflectedVelocity.Y *= -1; // Bounce off a side wall
 		}
 	}
 	else
 	{
-		// Collision avec le paddle : Modifier l'angle en fonction de la position sur le paddle
+		// Collision with the paddle: Change the angle depending on the position on the paddle
 		FVector PaddleNormal = (BallPosition - BoxCenter);
 		PaddleNormal.Z = 0.0f; // Ignorer Z
 		PaddleNormal = PaddleNormal.GetSafeNormal();
 
-		// Appliquer la réflexion normale
+		// Apply normal reflection
 		ReflectedVelocity = ReflectedVelocity - 2 * FVector::DotProduct(ReflectedVelocity, PaddleNormal) * PaddleNormal;
 
-		// Toujours orienter la balle vers le haut en X
+		// Always point the ball upwards in an X shape
 		ReflectedVelocity.X = FMath::Abs(ReflectedVelocity.X);
 	}
 
-	// Forcer Z à 0 (pas de mouvement vertical)
+	// Force Z to 0 (no vertical movement)
 	ReflectedVelocity.Z = 0.0f;
 
-	// Mettre à jour la direction de la balle
+	// Update ball direction
 	CurrentDirection = ReflectedVelocity.GetSafeNormal();
 
 	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, TEXT("Ball Reflected"));
-
-	// // Calculate the bounce normal (normal based on the collision surface)
-	// FVector PaddleNormal = (GetActorLocation() - Box->GetComponentLocation());
-	// PaddleNormal.Z = 0.0f;
-	// PaddleNormal = PaddleNormal.GetSafeNormal();
-	//
-	// // Apply the reflection formula
-	// const FVector IncomingVelocity = CurrentDirection * Velocity;
-	// FVector ReflectedVelocity = IncomingVelocity - 2 * FVector::DotProduct(IncomingVelocity, PaddleNormal) * PaddleNormal;
-	//
-	// // To always make the ball go up (if hit)
-	// ReflectedVelocity.X = FMath::Abs(ReflectedVelocity.X);
-	// ReflectedVelocity.Y = FMath::Abs(ReflectedVelocity.Y);
-	// ReflectedVelocity.Z = 0.0f;
-	//
-	// // Update the ball direction with the new calculated direction
-	// CurrentDirection = ReflectedVelocity.GetSafeNormal();
-	//
-	// // GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, TEXT("Ball Reflected"));
 }
 
 void ABKGameBall::MoveBall(float DeltaTime)

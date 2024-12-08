@@ -3,6 +3,8 @@
 
 #include "BKBrick.h"
 
+#include "BKBoundaryWallComponent.h"
+
 
 // Sets default values
 ABKBrick::ABKBrick()

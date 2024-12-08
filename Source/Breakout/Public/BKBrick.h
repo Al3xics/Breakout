@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "BKBrick.generated.h"
 
+class UBKBoundaryWallComponent;
+
 UCLASS()
 class BREAKOUT_API ABKBrick : public AActor
 {
@@ -14,6 +16,12 @@ class BREAKOUT_API ABKBrick : public AActor
 public:
 	// Sets default values for this actor's properties
 	ABKBrick();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Brick")
+	TObjectPtr<UStaticMeshComponent> StaticMeshComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Brick")
+	UBKBoundaryWallComponent* BoundaryWall;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

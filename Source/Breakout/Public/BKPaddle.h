@@ -52,12 +52,12 @@ protected:
 	virtual void BeginPlay() override;
 	
 private :
-	UFUNCTION()
-	void OnMoveTriggered(const FInputActionValue& Value);
-
 	UPROPERTY()
 	FVector CurrentLocation;
 
 	UPROPERTY()
 	ABKGameMode* BkGameMode;
+
+	UFUNCTION()
+    void OnMoveTriggered(const FInputActionValue& Value);                     	
 };

@@ -20,16 +20,6 @@ class BREAKOUT_API ABKGameMode : public AGameModeBase
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	
-	UFUNCTION()
-	bool PerformBoxTrace(FHitResult& OutHit, const FVector& StartLocation, const FVector& EndLocation, const FVector& BoxExtent,
-						 const FVector& BoxOffset, ETraceTypeQuery TraceChannel, float VisibilityDuration) const;
-
-	UFUNCTION()
-	void SpawnGameBall(const ABKPaddle* Paddle);
-	
-	UFUNCTION()
-	void SnapToGround(AActor* Actor) const;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "BK Game Mode")
 	TSubclassOf<ABKGameBall> GameBallBlueprint;
@@ -54,10 +44,17 @@ public:
 
 	UPROPERTY()
 	ABKPaddle* BkPaddle;
+	
+	UFUNCTION()
+	void SpawnGameBall(const ABKPaddle* Paddle);
+	
+	UFUNCTION()
+	void SnapToGround(AActor* Actor) const;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
+	
 };

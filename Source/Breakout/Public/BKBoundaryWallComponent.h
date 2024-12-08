@@ -18,10 +18,10 @@ public:
 	// Sets default values for this component's properties
 	UBKBoundaryWallComponent();
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Boundary Wall Component")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
 	UBoxComponent* WallBox;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Boundary Wall Component")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
 	USphereComponent* WallSphere;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
