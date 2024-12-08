@@ -12,21 +12,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f7427bc5-3b2d-4f89-a5d2-9142a18f6851" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKBoundaryWallComponent.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKBoundaryWallComponent.h" afterDir="false" />
+    <list default="true" id="c5e56b41-8d79-4191-877a-f051cf00fc31" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Breakout/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Breakout/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Breakout/Blueprint/Input/IA_Move.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Breakout/Blueprint/Input/IA_Move.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Breakout/Blueprint/Input/IMC_PaddleMapping.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Breakout/Blueprint/Input/IMC_PaddleMapping.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Breakout/Map/BreakoutMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Breakout/Map/BreakoutMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Private/BKBrick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKBrick.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Private/BKGameBall.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKGameBall.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Private/BKGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKGameMode.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Breakout/Blueprint/BP_Paddle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Breakout/Blueprint/BP_Paddle.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Breakout/Private/BKBoundaryWallComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKBoundaryWallComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Breakout/Private/BKPaddle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Private/BKPaddle.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Public/BKBrick.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKBrick.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Public/BKGameBall.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKGameBall.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Breakout/Public/BKGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKGameMode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Breakout/Public/BKBoundaryWallComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKBoundaryWallComponent.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Breakout/Public/BKPaddle.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Breakout/Public/BKPaddle.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,103 +25,33 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DpaMonitoringSettings">
-    <option name="firstShow" value="false" />
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Al3xics&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Al3xics"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Al3xics/Breakout.git&quot;,
-    &quot;accountId&quot;: &quot;cbc22e06-30a3-45b5-be5d-63013ab60d0b&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Al3xics/Breakout.git",
+    "accountId": "cbc22e06-30a3-45b5-be5d-63013ab60d0b"
   }
-}</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://29" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Developer/DerivedDataCache/Private/DerivedDataBuildDefinition.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Private/Logging/StructuredLog.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectHandle.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/GameFramework/Pawn.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Components/ActorComponent.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Components/PawnMovementComponent.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Components/SceneComponent.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Elements/Framework/EngineElementsLibrary.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/Pawn.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Private/UserInterface/CanvasItem.cpp" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 8
-}</component>
-  <component name="ProjectId" id="2ptMbbslshs0ZLeqPNYOFBZxtMM" />
+}]]></component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2pvXkg2dOzpzZiD9ZVAsdwXUSEQ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "C/C++ Project.Breakout.executor": "Debug",
-    "Notification.DisplayName-DoNotAsk-Rider": "Rider",
-    "Notification.DoNotAsk-Rider": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
@@ -140,7 +61,6 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "SolutionBuilderGeneralOptionsPage",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -236,30 +156,26 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile">
-        <settings />
-      </deployment>
-      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <deployment type="dockerfile" />
       <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f7427bc5-3b2d-4f89-a5d2-9142a18f6851" name="Changes" comment="" />
-      <created>1733580992073</created>
+      <changelist id="c5e56b41-8d79-4191-877a-f051cf00fc31" name="Changes" comment="" />
+      <created>1733647668361</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1733580992073</updated>
-      <workItem from="1733580993647" duration="533000" />
-      <workItem from="1733581892853" duration="217000" />
-      <workItem from="1733582302315" duration="19336000" />
+      <updated>1733647668361</updated>
+      <workItem from="1733647670062" duration="1071000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

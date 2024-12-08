@@ -20,23 +20,25 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
-	UPROPERTY(EditAnywhere, Category="BK Boundary Wall")
-	FVector BoxCenter;
-	
-	UPROPERTY(EditAnywhere, Category="BK Boundary Wall")
-	FVector BoxExtent;
-
-	UPROPERTY(EditAnywhere, Category="BK Boundary Wall")
-	bool bShowBox;
-	
 	UFUNCTION(Blueprintable)
 	void Initialize(const FVector& NewCenter, const FVector& NewExtent, const bool bEnable);
 	
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Boundary Wall Component")
+	UBoxComponent* WallBox;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
+	FVector BoxCenter;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
+	FVector BoxExtent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
+	bool bShowBox;
 
 private:
-	UPROPERTY(VisibleAnywhere, Category="BK Boundary Wall Component")
-	UBoxComponent* WallBox;
+	
 };

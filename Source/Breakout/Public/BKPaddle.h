@@ -30,6 +30,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Paddle")
+	TObjectPtr<UStaticMeshComponent> StaticMeshComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Paddle")
+	UBKBoundaryWallComponent* BoundaryWall;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Paddle")
 	TSoftObjectPtr<UInputMappingContext> InputMappingContext;
 
@@ -48,12 +54,6 @@ protected:
 private :
 	UFUNCTION()
 	void OnMoveTriggered(const FInputActionValue& Value);
-
-	UPROPERTY(VisibleAnywhere, Category="BK Paddle")
-	TObjectPtr<UStaticMeshComponent> StaticMeshComponent;
-
-	UPROPERTY(VisibleAnywhere, Category="BK Paddle")
-	UBKBoundaryWallComponent* BoundaryWall;
 
 	UPROPERTY()
 	FVector CurrentLocation;

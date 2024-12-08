@@ -7,6 +7,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
 ABKPaddle::ABKPaddle()
@@ -29,16 +30,20 @@ void ABKPaddle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	const float MinY = BkGameMode->GameBoxCenter.Y - BkGameMode->GameBoxExtent.Y;
-	const float MaxY = BkGameMode->GameBoxCenter.Y + BkGameMode->GameBoxExtent.Y;
+	CurrentLocation = GetActorLocation();
 	
-	if (GetActorLocation().Y < MinY || GetActorLocation().Y > MaxY)
+	const float GameBoxMinY = BkGameMode->GameBoxCenter.Y - BkGameMode->GameBoxExtent.Y;
+	const float GameBoxMaxY = BkGameMode->GameBoxCenter.Y + BkGameMode->GameBoxExtent.Y;
+	
+	const float PaddleHalfWidth = StaticMeshComponent->Bounds.BoxExtent.Y;
+	const float PaddleMinY = CurrentLocation.Y - PaddleHalfWidth;
+	const float PaddleMaxY = CurrentLocation.Y + PaddleHalfWidth;
+	
+	if (PaddleMinY < GameBoxMinY || PaddleMaxY > GameBoxMaxY)
 	{
 		// Clamp location of the paddle between the game box
-		CurrentLocation = GetActorLocation();
 		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Red, FString::Printf(TEXT("Current Location : %f"), CurrentLocation.Y));
-		
-		CurrentLocation.Y = FMath::Clamp(CurrentLocation.Y, MinY, MaxY);
+		CurrentLocation.Y = FMath::Clamp(CurrentLocation.Y, GameBoxMinY + PaddleHalfWidth, GameBoxMaxY - PaddleHalfWidth);
 		SetActorLocation(CurrentLocation);
 	}
 }
@@ -61,8 +66,11 @@ void ABKPaddle::BeginPlay()
 	// Get a ref to BKGameMode
 	BkGameMode = Cast<ABKGameMode>(GetWorld()->GetAuthGameMode());
 
-	// Initialize the component used to check collision
+	// Initialize the component to have the same size as static mesh (used to check collision)
+	BoxCenter = StaticMeshComponent->GetComponentLocation();
+	BoxExtent = StaticMeshComponent->Bounds.BoxExtent;
 	BoundaryWall->Initialize(BoxCenter, BoxExtent, bShowBox);
+	// GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Cyan, FString::Printf(TEXT("Mesh Box Extent : %f, %f, %f"),StaticMeshComponent->Bounds.BoxExtent.X, StaticMeshComponent->Bounds.BoxExtent.Y, StaticMeshComponent->Bounds.BoxExtent.Z));
 	
 	// Add mapping context
 	if (const auto PlayerController = Cast<APlayerController>(Controller))
