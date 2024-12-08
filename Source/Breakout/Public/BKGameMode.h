@@ -6,6 +6,8 @@
 #include "GameFramework/GameModeBase.h"
 #include "BKGameMode.generated.h"
 
+class ABKGameBall;
+class ABKPaddle;
 /**
  * 
  */
@@ -22,6 +24,15 @@ public:
 	bool PerformBoxTrace(FHitResult& OutHit, const FVector& StartLocation, const FVector& EndLocation, const FVector& BoxExtent,
 						 const FVector& BoxOffset, ETraceTypeQuery TraceChannel, float VisibilityDuration) const;
 
+	UFUNCTION()
+	void SpawnGameBall(const ABKPaddle* Paddle);
+	
+	UFUNCTION()
+	void SnapToGround(AActor* Actor) const;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "BK Game Mode")
+	TSubclassOf<ABKGameBall> GameBallBlueprint;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Game Mode")
 	FVector GameBoxCenter = FVector(700.0f, 0.0f, 0.0f);
 
@@ -34,10 +45,12 @@ public:
 	UPROPERTY()
 	AActor* WallActor;
 
+	UPROPERTY()
+	ABKGameBall* GameBall;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
-	
 };

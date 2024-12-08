@@ -3,12 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BKGameMode.h"
 #include "InputAction.h"
 #include "InputMappingContext.h"
 #include "GameFramework/Character.h"
 #include "BKPaddle.generated.h"
 
+class ABKGameMode;
 class UBKBoundaryWallComponent;
 
 UCLASS()
@@ -19,16 +19,6 @@ class BREAKOUT_API ABKPaddle : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ABKPaddle();
-
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Paddle")
 	TObjectPtr<UStaticMeshComponent> StaticMeshComponent;
@@ -50,6 +40,16 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Paddle")
 	bool bShowBox = true;
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 	
 private :
 	UFUNCTION()

@@ -3,6 +3,7 @@
 
 #include "BKBoundaryWallComponent.h"
 
+#include "BKGameBall.h"
 #include "BKPaddle.h"
 
 
@@ -13,7 +14,22 @@ UBKBoundaryWallComponent::UBKBoundaryWallComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	WallBox = CreateDefaultSubobject<UBoxComponent>(TEXT("WallBox"));
+	// Verify the type of owner
+	if (const AActor* Owner = GetOwner())
+	{
+		if (Owner->IsA(ABKPaddle::StaticClass()))
+		{ 
+			WallBox = CreateDefaultSubobject<UBoxComponent>(TEXT("WallBox"));
+		}
+		else if (Owner->IsA(ABKGameBall::StaticClass()))
+		{
+			WallSphere = CreateDefaultSubobject<USphereComponent>(TEXT("WallSphere"));
+		}
+		else if (Owner->IsA(AActor::StaticClass())) // Use when spawning an AActor (so it doesn't correspond to any other class)
+		{
+			WallBox = CreateDefaultSubobject<UBoxComponent>(TEXT("WallBox"));
+		}
+	}
 	
 }
 
@@ -22,11 +38,35 @@ UBKBoundaryWallComponent::UBKBoundaryWallComponent()
 void UBKBoundaryWallComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (!IsRegistered()) RegisterComponent();
 	
-	WallBox->RegisterComponent();
-	WallBox->SetWorldLocation(BoxCenter);
-	WallBox->SetBoxExtent(BoxExtent);
-	WallBox->SetHiddenInGame(!bShowBox);
+	// Verify the type of owner
+	if (const AActor* Owner = GetOwner())
+	{
+		if (Owner->IsA(ABKPaddle::StaticClass()))
+		{
+			WallBox->AttachToComponent(Owner->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+			WallBox->SetWorldLocation(BoundaryCenter);
+			WallBox->SetBoxExtent(BoundaryExtent);
+			WallBox->SetHiddenInGame(!bShowBoundary);
+			
+		}
+		else if (Owner->IsA(ABKGameBall::StaticClass()))
+		{
+			WallSphere->AttachToComponent(Owner->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+			WallSphere->SetWorldLocation(BoundaryCenter);
+			WallSphere->SetSphereRadius(SphereRadius);
+			WallSphere->SetHiddenInGame(!bShowBoundary);
+		}
+		else if (Owner->IsA(AActor::StaticClass()))
+		{
+			WallBox->AttachToComponent(Owner->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+			WallBox->SetWorldLocation(BoundaryCenter);
+			WallBox->SetBoxExtent(BoundaryExtent);
+			WallBox->SetHiddenInGame(!bShowBoundary);
+		}
+	}
 }
 
 
@@ -35,25 +75,31 @@ void UBKBoundaryWallComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
-	// The wall box will follow the paddle (used to check collisions)
-	if (const ABKPaddle* Owner = Cast<ABKPaddle>(GetOwner()))
-	{
-		// GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Red, "Wall Paddle");
-		const FVector NewLocation = Owner->GetActorLocation() + BoxCenter;
-		WallBox->SetWorldLocation(NewLocation);
-	}
-	
 }
 
-void UBKBoundaryWallComponent::Initialize(const FVector& NewCenter, const FVector& NewExtent, const bool bEnable)
+void UBKBoundaryWallComponent::InitializeBox(const FVector& NewCenter, const FVector& NewExtent, const bool bEnable)
 {
-	BoxCenter = NewCenter;
-	BoxExtent = NewExtent;
-	bShowBox = bEnable;
+	BoundaryCenter = NewCenter;
+	BoundaryExtent = NewExtent;
+	bShowBoundary = bEnable;
 	
-	WallBox->RegisterComponent();
-	WallBox->SetWorldLocation(BoxCenter);
-	WallBox->SetBoxExtent(BoxExtent);
-	WallBox->SetHiddenInGame(!bShowBox);
+	WallBox->SetWorldLocation(BoundaryCenter);
+	WallBox->SetBoxExtent(BoundaryExtent);
+	WallBox->SetHiddenInGame(!bShowBoundary);
+
+	if (!WallBox->IsRegistered()) WallBox->RegisterComponent(); // Ensure WallBox is registered
+}
+
+void UBKBoundaryWallComponent::InitializeSphere(const FVector& NewCenter, const float NewSphereRadius, const bool bEnable)
+{
+	BoundaryCenter = NewCenter;
+	SphereRadius = NewSphereRadius;
+	bShowBoundary = bEnable;
+	
+	WallSphere->SetWorldLocation(BoundaryCenter);
+	WallSphere->SetSphereRadius(SphereRadius);
+	WallSphere->SetHiddenInGame(!bShowBoundary);
+
+	if (!WallSphere->IsRegistered()) WallSphere->RegisterComponent(); // Ensure WallSphere is registered
 }
 

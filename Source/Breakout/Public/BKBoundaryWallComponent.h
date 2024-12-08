@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Components/BoxComponent.h"
+#include "Components/SphereComponent.h"
 #include "BKBoundaryWallComponent.generated.h"
 
 
@@ -16,28 +17,37 @@ class BREAKOUT_API UBKBoundaryWallComponent : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	UBKBoundaryWallComponent();
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Boundary Wall Component")
+	UBoxComponent* WallBox;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Boundary Wall Component")
+	USphereComponent* WallSphere;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
+	FVector BoundaryCenter;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
+	FVector BoundaryExtent;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
+	float SphereRadius;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
+	bool bShowBoundary;
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 	UFUNCTION(Blueprintable)
-	void Initialize(const FVector& NewCenter, const FVector& NewExtent, const bool bEnable);
+	void InitializeBox(const FVector& NewCenter, const FVector& NewExtent, const bool bEnable);
+	
+	UFUNCTION(Blueprintable)
+	void InitializeSphere(const FVector& NewCenter, const float NewSphereRadius, const bool bEnable);
 	
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category="BK Boundary Wall Component")
-	UBoxComponent* WallBox;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
-	FVector BoxCenter;
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
-	FVector BoxExtent;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="BK Boundary Wall")
-	bool bShowBox;
 
 private:
 	

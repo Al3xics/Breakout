@@ -3,11 +3,11 @@
 
 #include "BKPaddle.h"
 
+#include "BKGameMode.h"
 #include "BKBoundaryWallComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
 ABKPaddle::ABKPaddle()
@@ -20,8 +20,6 @@ ABKPaddle::ABKPaddle()
 	StaticMeshComponent->SetupAttachment(RootComponent);
 
 	BoundaryWall = CreateDefaultSubobject<UBKBoundaryWallComponent>("BoundaryWall");
-	// BoundaryWall = NewObject<UBKBoundaryWallComponent>(this);
-	// BoundaryWall->Initialize(BoxCenter, BoxExtent, bShowBox);
 	
 }
 
@@ -42,7 +40,7 @@ void ABKPaddle::Tick(float DeltaTime)
 	if (PaddleMinY < GameBoxMinY || PaddleMaxY > GameBoxMaxY)
 	{
 		// Clamp location of the paddle between the game box
-		GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Red, FString::Printf(TEXT("Current Location : %f"), CurrentLocation.Y));
+		// GEngine->AddOnScreenDebugMessage(-1, 0.0f, FColor::Red, FString::Printf(TEXT("Current Location : %f"), CurrentLocation.Y));
 		CurrentLocation.Y = FMath::Clamp(CurrentLocation.Y, GameBoxMinY + PaddleHalfWidth, GameBoxMaxY - PaddleHalfWidth);
 		SetActorLocation(CurrentLocation);
 	}
@@ -69,8 +67,10 @@ void ABKPaddle::BeginPlay()
 	// Initialize the component to have the same size as static mesh (used to check collision)
 	BoxCenter = StaticMeshComponent->GetComponentLocation();
 	BoxExtent = StaticMeshComponent->Bounds.BoxExtent;
-	BoundaryWall->Initialize(BoxCenter, BoxExtent, bShowBox);
+	BoundaryWall->InitializeBox(BoxCenter, BoxExtent, bShowBox);
 	// GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Cyan, FString::Printf(TEXT("Mesh Box Extent : %f, %f, %f"),StaticMeshComponent->Bounds.BoxExtent.X, StaticMeshComponent->Bounds.BoxExtent.Y, StaticMeshComponent->Bounds.BoxExtent.Z));
+	
+	BkGameMode->SnapToGround(this);
 	
 	// Add mapping context
 	if (const auto PlayerController = Cast<APlayerController>(Controller))
@@ -84,7 +84,9 @@ void ABKPaddle::BeginPlay()
 			}
 		}
 	}
-	
+
+	// Ask the game mode to spawn the game ball
+	BkGameMode->SpawnGameBall(this);
 }
 
 void ABKPaddle::OnMoveTriggered(const FInputActionValue& Value)
